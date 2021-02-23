@@ -13,16 +13,39 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 }
-
+test {
+    exclude '**/SparkExceptionsApplicationTests.class'
+}
 repositories {
 	mavenCentral()
 }
-
+/*dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.RELEASE"
+	}
+}*/
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.apache.kafka:kafka-clients:2.7.0'
+	implementation 'org.apache.kafka:kafka-clients:2.7.0'
+	/*implementation 'org.apache.spark:spark-core_2.12:3.1.0'
+	implementation 'org.apache.spark:spark-sql_2.12:3.1.0'
+	implementation 'org.apache.spark:spark-streaming-kafka_2.11:1.6.3'
+	implementation 'org.apache.spark:spark-streaming_2.12:3.1.0'
+	implementation 'org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.0'
+	implementation 'org.codehaus.janino:commons-compiler:3.0.16'
+	implementation 'org.codehaus.janino:janino:3.0.16'
+	implementation 'com.google.code.gson:gson:2.8.6'
+	
+	compileOnly 'org.projectlombok:lombok:1.18.18'
+	annotationProcessor 'org.projectlombok:lombok:1.18.18'
+	compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
+	compile "org.springframework.cloud:spring-cloud-starter-zipkin"
+	compile "org.springframework.boot:spring-boot-starter-security"
+	compile "org.springframework.boot:spring-boot-starter-thymeleaf"*/
 }
 
 test {
