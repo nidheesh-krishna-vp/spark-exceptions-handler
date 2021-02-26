@@ -2,6 +2,8 @@ package com.sparkexception.services;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparkexception.exceptions.CustomException;
 import com.sparkexception.models.ErrorInfo;
 
@@ -13,7 +15,12 @@ public class ExceptionHandler {
 	}
 
 	private void publishErrorMessage(ErrorInfo errorInfo) {
-		// TODO write code to convert JSON and writing
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			objectMapper.writeValueAsString(errorInfo);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 
 	}
 
