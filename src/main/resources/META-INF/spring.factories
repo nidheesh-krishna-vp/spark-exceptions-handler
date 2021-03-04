@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration = com.sparkexception.aspects.LoggingAspect,com.sparkexception.services.ExceptionHandler

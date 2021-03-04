@@ -2,6 +2,8 @@ plugins {
 	id 'org.springframework.boot' version '2.4.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'java-library'
+    id 'maven-publish'
 }
 
 group = 'com.spark-exception'
@@ -13,56 +15,41 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 }
-/*bootJar {    
-    baseName = "exception-handler"
-    version =  '0.0.1'
-}*/
+
+bootJar {
+  enabled = false
+}
+
+jar {
+  enabled = true
+}
+
 test {
     exclude '**/SparkExceptionsApplicationTests.class'
 }
 
 repositories {
+ mavenLocal()
 	mavenCentral()
 }
-ext {
-	set('springCloudVersion', "2020.0.1")
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
 }
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	//implementation 'org.apache.kafka:kafka-clients:2.7.0'
-	//implementation 'org.apache.kafka:kafka-clients:2.7.0'
 	compile("org.aspectj:aspectjweaver:1.8.8")
-	
-	//compile('org.springframework.cloud:spring-cloud-starter-sleuth:1.2.4.RELEASE')
-	//compile "org.springframework.boot:spring-boot-starter-security"
-	//compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
-	//compile "org.springframework.cloud:spring-cloud-starter-zipkin"
-	
-	/*implementation 'org.apache.spark:spark-core_2.12:3.1.0'
-	implementation 'org.apache.spark:spark-sql_2.12:3.1.0'
-	implementation 'org.apache.spark:spark-streaming-kafka_2.11:1.6.3'
-	implementation 'org.apache.spark:spark-streaming_2.12:3.1.0'
-	implementation 'org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.0'
-	implementation 'org.codehaus.janino:commons-compiler:3.0.16'
-	implementation 'org.codehaus.janino:janino:3.0.16'
-	implementation 'com.google.code.gson:gson:2.8.6'
-	
 	compileOnly 'org.projectlombok:lombok:1.18.18'
-	annotationProcessor 'org.projectlombok:lombok:1.18.18'*/
-	//implementation 'org.springframework.cloud:spring-cloud-starter-sleuth:2.1.0.RELEASE'
-	/*
-	
-	compile "org.springframework.boot:spring-boot-starter-thymeleaf"*/
-	//compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '2.0.1.RELEASE'
+	annotationProcessor 'org.projectlombok:lombok:1.18.18'
+	implementation group: 'commons-collections', name: 'commons-collections', version: '3.2.2'
+	implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
 }
-/*dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
-}*/
 test {
 	useJUnitPlatform()
 }
